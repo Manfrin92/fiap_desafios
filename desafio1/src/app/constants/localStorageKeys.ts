@@ -1,0 +1,1 @@
+export const FREE_TIME_LOCAL_STORAGE_KEY = "freetime" as const;
