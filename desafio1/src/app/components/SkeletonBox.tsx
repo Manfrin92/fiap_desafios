@@ -1,3 +1,4 @@
+// TODO: REMOVE and add shadcn/ui
 type SkeletonBoxProps = {
   height: React.CSSProperties["height"];
 };

@@ -11,7 +11,7 @@ type SearchFormProps = {
 export function SearchForm({ onSubmit }: SearchFormProps) {
   const [searchInput, setSearchInput] = useState("");
   const [videoSearchResult, setVideoSearchResult] = useState<VideoResponse[]>([]);
-  //TODO: REMOVE
+  //TODO: REMOVE and add react query + hook
   const [loading, setLoading] = useState(false);
 
   async function handleSearch(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -20,8 +20,6 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
     const searchResult = await youtubeApi(searchInput);
     setLoading(false);
     setVideoSearchResult(searchResult);
-
-    console.log(searchResult);
   }
 
   return (
@@ -70,10 +68,10 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
 
       {loading && <SkeletonBox height="30rem" />}
 
-      {videoSearchResult.map((video, videoIndex) => {
+      {!loading && videoSearchResult.map((video, videoIndex) => {
         return <Video key={video.name + videoIndex} video={video} />;
       })}
-      {videoSearchResult.length > 0 && (
+      {!loading && videoSearchResult.length > 0 && (
         <button type="submit" style={{ cursor: "pointer" }}>
           Submit
         </button>

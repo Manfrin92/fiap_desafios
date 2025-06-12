@@ -9,9 +9,12 @@ import useGetFromLocalStorage from "./hooks/useGetFromLocalStorage";
 import { FREE_TIME_LOCAL_STORAGE_KEY } from "./constants/localStorageKeys";
 import { SearchForm } from "./components/SearchForm";
 
+// TODO: Add two more pages to separate the logic
+
 export default function Home() {
   const saveAvailableTime = useSaveToLocalStorage();
   const getInitialValues = useGetFromLocalStorage();
+  //TODO: Remove form state via use state and add yup + react-hook-form
   const [freeTimeInMinutes, setFreeTimeInMinutes] = useState<number | null>(null);
   const [formStep, setFormStep] = useState(1);
 
