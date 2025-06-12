@@ -76,7 +76,7 @@ export function WeeklyScheduleForm({ initialData, onSubmit }: WeeklyScheduleForm
         );
       })}
       <button type="submit" style={{ cursor: "pointer" }}>
-        Submit
+        Next
       </button>
     </form>
   );

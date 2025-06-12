@@ -7,11 +7,13 @@ import { useState } from "react";
 import useSaveToLocalStorage from "./hooks/useSaveToLocalStorage";
 import useGetFromLocalStorage from "./hooks/useGetFromLocalStorage";
 import { FREE_TIME_LOCAL_STORAGE_KEY } from "./constants/localStorageKeys";
+import { SearchForm } from "./components/SearchForm";
 
 export default function Home() {
   const saveAvailableTime = useSaveToLocalStorage();
   const getInitialValues = useGetFromLocalStorage();
-  const [freeTimeInMinutes, setFreeTimeInMinutes] = useState(0);
+  const [freeTimeInMinutes, setFreeTimeInMinutes] = useState<number | null>(null);
+  const [formStep, setFormStep] = useState(1);
 
   function onSubmit(values: FormValues) {
     const daysOfTheWeek = Object.keys(values);
@@ -28,6 +30,7 @@ export default function Home() {
 
     setFreeTimeInMinutes(availableTime);
     saveAvailableTime(FREE_TIME_LOCAL_STORAGE_KEY, JSON.stringify(values));
+    setFormStep(2);
   }
 
   return (
@@ -37,8 +40,12 @@ export default function Home() {
           <h3 style={{ textDecoration: "underline", marginBottom: "3rem" }}>Week:</h3>
           <WeeklyScheduleForm onSubmit={onSubmit} initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null} />
         </div>
+        <div style={{ minHeight: "3rem" }}>
+          {freeTimeInMinutes && <h4>Total free time in minutes: {freeTimeInMinutes}</h4>}
+        </div>
         <div>
-          <h4>Total free time in minutes: {freeTimeInMinutes}</h4>
+          <h3>Search videos</h3>
+          <SearchForm onSubmit={(values) => {console.log(values)}} />
         </div>
       </main>
     </div>
