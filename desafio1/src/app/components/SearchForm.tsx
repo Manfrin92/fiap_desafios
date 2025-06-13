@@ -18,12 +18,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
 
   return (
     <form
-      style={{
-        marginTop: "1rem",
-        gap: "0.5rem",
-        display: "flex",
-        flexDirection: "column",
-      }}
+      className="mt-4 flex flex-col gap-2"
       onSubmit={(e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
@@ -31,18 +26,10 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         onSubmit(data as any);
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          minWidth: "18rem",
-          alignItems: "center",
-          gap: "1rem",
-          marginBottom: "1rem",
-        }}
-      >
-        <div style={{ display: "flex", gap: "0.5rem", flex: 1 }}>
-          <div style={{ flex: 1 }}>
-            <label htmlFor="search-video" style={{ display: "none" }}>
+      <div className="flex gap-4 min-w-4 items-center mb-4">
+        <div className="flex gap-2 flex-1 bg-yellow">
+          <div className="flex-1">
+            <label htmlFor="search-video" className="hidden">
               Search videos
             </label>
             <input
@@ -52,10 +39,10 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
               placeholder="Search for videos..."
               value={searchInput}
               onChange={(e) => setSearchInput(e.currentTarget.value ?? "")}
-              style={{ width: "100%" }}
+              className="w-full"
             />
           </div>
-          <button style={{ cursor: "pointer", flex: 0.2 }} onClick={handleSearch}>
+          <button className="cursor-pointer flex-0.2" onClick={handleSearch}>
             Search
           </button>
         </div>
@@ -75,7 +62,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         })
       )}
       {!isLoading && videoSearchResult && videoSearchResult.length > 0 && (
-        <button type="submit" style={{ cursor: "pointer", marginTop: "1rem" }}>
+        <button type="submit" className="mt-4 cursor-pointer">
           Submit
         </button>
       )}
