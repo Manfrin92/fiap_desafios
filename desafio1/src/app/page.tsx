@@ -8,6 +8,9 @@ import useSaveToLocalStorage from "./hooks/useSaveToLocalStorage";
 import useGetFromLocalStorage from "./hooks/useGetFromLocalStorage";
 import { FREE_TIME_LOCAL_STORAGE_KEY } from "./constants/localStorageKeys";
 import { SearchForm } from "./components/SearchForm";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 // TODO: Add two more pages to separate the logic
 
@@ -38,19 +41,28 @@ export default function Home() {
 
   return (
     <div className={styles.page}>
-      <main className={styles.main}>
-        <div className={styles.ctas}>
-          <h3 style={{ textDecoration: "underline", marginBottom: "3rem" }}>Week:</h3>
-          <WeeklyScheduleForm onSubmit={onSubmit} initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null} />
-        </div>
-        <div style={{ minHeight: "3rem" }}>
-          {freeTimeInMinutes && <h4>Total free time in minutes: {freeTimeInMinutes}</h4>}
-        </div>
-        <div>
-          <h3>Search videos</h3>
-          <SearchForm onSubmit={(values) => {console.log(values)}} />
-        </div>
-      </main>
+      <QueryClientProvider client={queryClient}>
+        <main className={styles.main}>
+          <div className={styles.ctas}>
+            <h3 style={{ textDecoration: "underline", marginBottom: "3rem" }}>Week:</h3>
+            <WeeklyScheduleForm
+              onSubmit={onSubmit}
+              initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null}
+            />
+          </div>
+          <div style={{ minHeight: "3rem" }}>
+            {freeTimeInMinutes && <h4>Total free time in minutes: {freeTimeInMinutes}</h4>}
+          </div>
+          <div>
+            <h3>Search videos</h3>
+            <SearchForm
+              onSubmit={(values) => {
+                console.log(values);
+              }}
+            />
+          </div>
+        </main>
+      </QueryClientProvider>
     </div>
   );
 }

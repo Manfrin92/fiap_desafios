@@ -1,8 +1,7 @@
-import { youtubeApi } from "@/lib/api/youtubeApi";
 import React, { useState } from "react";
-import type { VideoResponse } from "../types/videoResponse";
 import { Video } from "./Video";
 import { Skeleton } from "../../components/ui/skeleton";
+import { useYoutubeSearch } from "../hooks/useYoutubeSearch";
 
 type SearchFormProps = {
   onSubmit(value: any): void;
@@ -10,16 +9,11 @@ type SearchFormProps = {
 
 export function SearchForm({ onSubmit }: SearchFormProps) {
   const [searchInput, setSearchInput] = useState("");
-  const [videoSearchResult, setVideoSearchResult] = useState<VideoResponse[]>([]);
-  //TODO: REMOVE and add react query + hook
-  const [loading, setLoading] = useState(false);
+  const { data: videoSearchResult, isLoading, refetch } = useYoutubeSearch(searchInput, false);
 
   async function handleSearch(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
-    setLoading(true);
-    const searchResult = await youtubeApi(searchInput);
-    setLoading(false);
-    setVideoSearchResult(searchResult);
+    refetch();
   }
 
   return (
@@ -67,7 +61,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         </div>
       </div>
 
-      {loading ? (
+      {isLoading ? (
         <>
           <Skeleton className="h-[5rem]" />
           <Skeleton className="h-[5rem]" />
@@ -76,11 +70,11 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
           <Skeleton className="h-[5rem]" />
         </>
       ) : (
-        videoSearchResult.map((video, videoIndex) => {
+        videoSearchResult?.map((video, videoIndex) => {
           return <Video key={video.name + videoIndex} video={video} />;
         })
       )}
-      {!loading && videoSearchResult.length > 0 && (
+      {!isLoading && videoSearchResult && videoSearchResult.length > 0 && (
         <button type="submit" style={{ cursor: "pointer", marginTop: "1rem" }}>
           Submit
         </button>
