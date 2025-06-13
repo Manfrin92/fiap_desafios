@@ -26,7 +26,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
     <form
       style={{
         marginTop: "1rem",
-        gap: "1.5rem",
+        gap: "0.5rem",
         display: "flex",
         flexDirection: "column",
       }}
@@ -43,6 +43,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
           minWidth: "18rem",
           alignItems: "center",
           gap: "1rem",
+          marginBottom: "1rem",
         }}
       >
         <div style={{ display: "flex", gap: "0.5rem", flex: 1 }}>
@@ -68,11 +69,12 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
 
       {loading && <SkeletonBox height="30rem" />}
 
-      {!loading && videoSearchResult.map((video, videoIndex) => {
-        return <Video key={video.name + videoIndex} video={video} />;
-      })}
+      {!loading &&
+        videoSearchResult.map((video, videoIndex) => {
+          return <Video key={video.name + videoIndex} video={video} />;
+        })}
       {!loading && videoSearchResult.length > 0 && (
-        <button type="submit" style={{ cursor: "pointer" }}>
+        <button type="submit" style={{ cursor: "pointer", marginTop: "1rem" }}>
           Submit
         </button>
       )}
