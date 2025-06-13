@@ -1,8 +1,8 @@
 import { youtubeApi } from "@/lib/api/youtubeApi";
 import React, { useState } from "react";
 import type { VideoResponse } from "../types/videoResponse";
-import SkeletonBox from "./SkeletonBox";
 import { Video } from "./Video";
+import { Skeleton } from "../../components/ui/skeleton";
 
 type SearchFormProps = {
   onSubmit(value: any): void;
@@ -67,12 +67,19 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         </div>
       </div>
 
-      {loading && <SkeletonBox height="30rem" />}
-
-      {!loading &&
+      {loading ? (
+        <>
+          <Skeleton className="h-[5rem]" />
+          <Skeleton className="h-[5rem]" />
+          <Skeleton className="h-[5rem]" />
+          <Skeleton className="h-[5rem]" />
+          <Skeleton className="h-[5rem]" />
+        </>
+      ) : (
         videoSearchResult.map((video, videoIndex) => {
           return <Video key={video.name + videoIndex} video={video} />;
-        })}
+        })
+      )}
       {!loading && videoSearchResult.length > 0 && (
         <button type="submit" style={{ cursor: "pointer", marginTop: "1rem" }}>
           Submit

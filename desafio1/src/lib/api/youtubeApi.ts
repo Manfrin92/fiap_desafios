@@ -17,7 +17,7 @@ export async function youtubeApi(searchQuery: string): Promise<VideoResponse[]> 
     const minutes = Math.floor(Math.random() * 60); // 0–59 minutes
 
     const videoResponse: VideoResponse = {
-      name: `Video ${i + 1} - ${searchQuery}`,
+      name: `Video ${i + 1}`,
       description: `This is a mock description for video ${i + 1} based on the search: "${searchQuery}".`,
       duration: `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`,
       thumbnailUrl: thumbnails[i],

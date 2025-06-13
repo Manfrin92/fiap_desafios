@@ -21,9 +21,11 @@ export function Video({ video }: VideoProps) {
       <input type="checkbox" style={{}} />
       <Image src={video.thumbnailUrl} alt="YouTube Thumbnail" width={96} height={65} style={{ objectFit: "cover" }} />
       <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-        <span style={{ fontSize: "1rem", fontWeight: "bolder" }}>{video.name}</span>
-        <span style={{ fontSize: "0.8rem" }}>{video.description}</span>
-        <span style={{ fontSize: "0.7rem" }}>Duration: {video.duration}</span>
+        <span className="text-[0.85rem] font-bold">{video.name}</span>
+        <span className="text-[0.75rem]">
+          {video.description?.length > 105 ? video.description.slice(0, 105) + "..." : video.description}
+        </span>
+        <span className="text-[0.6rem]">Duration: {video.duration}</span>
       </div>
     </div>
   );
