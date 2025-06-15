@@ -46,15 +46,13 @@ export default function Page() {
         </CardHeader>
         <CardContent>
           <WeeklyScheduleForm onSubmit={onSubmit} initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null} />
-          <div>
-            <CardTitle>Search videos:</CardTitle>
-            <CardDescription>Select the videos you'd like to watch during your week</CardDescription>
-            <SearchForm
-              onSubmit={(values) => {
-                console.log(values);
-              }}
-            />
-          </div>
+          <CardTitle>Search videos:</CardTitle>
+          <CardDescription className="mt-1">Select the videos you'd like to watch during your week</CardDescription>
+          <SearchForm
+            onSubmit={(values) => {
+              console.log(values);
+            }}
+          />
         </CardContent>
       </Card>
     </div>

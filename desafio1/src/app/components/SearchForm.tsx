@@ -3,6 +3,7 @@ import { Video } from "./Video";
 import { Skeleton } from "../../components/ui/skeleton";
 import { useYoutubeSearch } from "../hooks/useYoutubeSearch";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 type SearchFormProps = {
   onSubmit(value: any): void;
@@ -33,14 +34,11 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
             <label htmlFor="search-video" className="hidden">
               Search videos
             </label>
-            <input
-              id="search-video"
-              name="search-video"
+            <Input
               type="text"
               placeholder="Search for videos..."
               value={searchInput}
               onChange={(e) => setSearchInput(e.currentTarget.value ?? "")}
-              className="w-full"
             />
           </div>
           <Button className="cursor-pointer" variant="ghost" onClick={handleSearch}>

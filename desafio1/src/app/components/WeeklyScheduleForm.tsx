@@ -1,6 +1,7 @@
 import React from "react";
 import type { FormValues } from "../types/formType";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 type WeeklyScheduleFormProps = {
   initialData: FormValues | null;
@@ -46,7 +47,7 @@ export function WeeklyScheduleForm({ initialData, onSubmit }: WeeklyScheduleForm
                 <label htmlFor={hourKey} style={{ display: "none" }}>
                   {day} Hours
                 </label>
-                <input
+                <Input
                   id={hourKey}
                   defaultValue={initialData ? initialData[hourKey] : ""}
                   name={hourKey}
@@ -61,7 +62,7 @@ export function WeeklyScheduleForm({ initialData, onSubmit }: WeeklyScheduleForm
                 <label htmlFor={minutesKey} style={{ display: "none" }}>
                   {day} Minutes
                 </label>
-                <input
+                <Input
                   id={minutesKey}
                   defaultValue={initialData ? initialData[minutesKey] : ""}
                   name={minutesKey}
