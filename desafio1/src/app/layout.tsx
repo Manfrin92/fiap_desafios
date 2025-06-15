@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Providers } from "./providers";
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -9,7 +8,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="bg-slate-700 text-white">
+        <header className="flex justify-center border-b-2 border-gray-300 p-8" >
+          <h1 className="text-4xl">Fiap Desafios</h1>
+        </header>
         <Providers>{children}</Providers>
       </body>
     </html>
