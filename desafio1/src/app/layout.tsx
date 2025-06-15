@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-neutral-950 text-white">
-        <header className="flex justify-center border-b-2 border-gray-300 p-8" >
+        <header className="flex justify-center border-b-2 border-neutral-600 p-8" >
           <h1 className="text-4xl">Fiap Desafios</h1>
         </header>
         <Providers>{children}</Providers>

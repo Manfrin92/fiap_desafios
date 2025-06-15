@@ -1,5 +1,6 @@
 import React from "react";
 import type { FormValues } from "../types/formType";
+import { Button } from "@/components/ui/button";
 
 type WeeklyScheduleFormProps = {
   initialData: FormValues | null;
@@ -75,9 +76,11 @@ export function WeeklyScheduleForm({ initialData, onSubmit }: WeeklyScheduleForm
           </div>
         );
       })}
-      <button type="submit" style={{ cursor: "pointer" }}>
-        Update
-      </button>
+      <div className="flex flex-wrap items-center gap-2 md:flex-row justify-end">
+        <Button type="submit" className="cursor-pointer" variant="secondary">
+          Update
+        </Button>
+      </div>
     </form>
   );
 }

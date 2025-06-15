@@ -37,7 +37,7 @@ export default function Page() {
 
   return (
     <div className="flex justify-center">
-      <Card className="bg-neutral-800 w-lg max-w-svh text-white mt-8">
+      <Card className="bg-neutral-800 w-lg max-w-svh text-white mt-8 border-neutral-600">
         <CardHeader>
           <CardTitle>Week:</CardTitle>
           <CardDescription>

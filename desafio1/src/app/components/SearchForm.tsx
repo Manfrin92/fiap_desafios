@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Video } from "./Video";
 import { Skeleton } from "../../components/ui/skeleton";
 import { useYoutubeSearch } from "../hooks/useYoutubeSearch";
+import { Button } from "@/components/ui/button";
 
 type SearchFormProps = {
   onSubmit(value: any): void;
@@ -27,7 +28,7 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
       }}
     >
       <div className="flex gap-4 min-w-4 items-center mb-4">
-        <div className="flex gap-2 flex-1 bg-yellow">
+        <div className="flex gap-2 flex-1">
           <div className="flex-1">
             <label htmlFor="search-video" className="hidden">
               Search videos
@@ -42,9 +43,9 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
               className="w-full"
             />
           </div>
-          <button className="cursor-pointer flex-0.2" onClick={handleSearch}>
+          <Button className="cursor-pointer" variant="ghost" onClick={handleSearch}>
             Search
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -62,9 +63,9 @@ export function SearchForm({ onSubmit }: SearchFormProps) {
         })
       )}
       {!isLoading && videoSearchResult && videoSearchResult.length > 0 && (
-        <button type="submit" className="mt-4 cursor-pointer">
+        <Button type="submit" className="cursor-pointer mt-4" variant="secondary">
           Submit
-        </button>
+        </Button>
       )}
     </form>
   );
