@@ -7,6 +7,7 @@ import useGetFromLocalStorage from "../hooks/useGetFromLocalStorage";
 import useSaveToLocalStorage from "../hooks/useSaveToLocalStorage";
 import { getMinutesByHours } from "@/lib/timeHelper";
 import { FREE_TIME_LOCAL_STORAGE_KEY } from "../constants/localStorageKeys";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Page() {
   const saveAvailableTime = useSaveToLocalStorage();
@@ -35,22 +36,27 @@ export default function Page() {
   }
 
   return (
-    <div>
-      <div>
-        <h3 style={{ textDecoration: "underline", marginBottom: "3rem" }}>Week:</h3>
-        <WeeklyScheduleForm onSubmit={onSubmit} initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null} />
-      </div>
-      <div style={{ minHeight: "3rem" }}>
-        {freeTimeInMinutes && <h4>Total free time in minutes: {freeTimeInMinutes}</h4>}
-      </div>
-      <div>
-        <h3>Search videos</h3>
-        <SearchForm
-          onSubmit={(values) => {
-            console.log(values);
-          }}
-        />
-      </div>
+    <div className="flex justify-center">
+      <Card className="bg-neutral-800 w-lg max-w-svh text-white mt-8">
+        <CardHeader>
+          <CardTitle>Week:</CardTitle>
+          <CardDescription>
+            Enter your available time per week day, currently you have {freeTimeInMinutes ?? 0} minutes
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <WeeklyScheduleForm onSubmit={onSubmit} initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null} />
+          <div>
+            <CardTitle>Search videos:</CardTitle>
+            <CardDescription>Select the videos you'd like to watch during your week</CardDescription>
+            <SearchForm
+              onSubmit={(values) => {
+                console.log(values);
+              }}
+            />
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
