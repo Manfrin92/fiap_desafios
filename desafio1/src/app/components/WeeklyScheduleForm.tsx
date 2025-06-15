@@ -41,7 +41,7 @@ export function WeeklyScheduleForm({ initialData, onSubmit }: WeeklyScheduleForm
               gap: "1rem",
             }}
           >
-            <span>{day}:</span>
+            <span>{day}</span>
             <div style={{ display: "flex", gap: "0.5rem" }}>
               <div>
                 <label htmlFor={hourKey} style={{ display: "none" }}>

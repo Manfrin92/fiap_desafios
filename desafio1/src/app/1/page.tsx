@@ -8,6 +8,7 @@ import useSaveToLocalStorage from "../hooks/useSaveToLocalStorage";
 import { getMinutesByHours } from "@/lib/timeHelper";
 import { FREE_TIME_LOCAL_STORAGE_KEY } from "../constants/localStorageKeys";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { BreadcrumbChallenges } from "../components/BreadcrumbChallenges";
 
 export default function Page() {
   const saveAvailableTime = useSaveToLocalStorage();
@@ -36,17 +37,20 @@ export default function Page() {
   }
 
   return (
-    <div className="flex justify-center">
-      <Card className="bg-neutral-800 w-lg max-w-svh text-white mt-8 border-neutral-600">
+    <div className="flex flex-col items-center">
+      <div className="mt-3">
+        <BreadcrumbChallenges currentChallenge="1" />
+      </div>
+      <Card className="bg-neutral-800 lg:w-lg max-w-svh text-white mt-8 border-neutral-600">
         <CardHeader>
-          <CardTitle>Week:</CardTitle>
+          <CardTitle>Week</CardTitle>
           <CardDescription>
             Enter your available time per week day, currently you have {freeTimeInMinutes ?? 0} minutes
           </CardDescription>
         </CardHeader>
         <CardContent>
           <WeeklyScheduleForm onSubmit={onSubmit} initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null} />
-          <CardTitle>Search videos:</CardTitle>
+          <CardTitle>Search videos</CardTitle>
           <CardDescription className="mt-1">Select the videos you'd like to watch during your week</CardDescription>
           <SearchForm
             onSubmit={(values) => {
