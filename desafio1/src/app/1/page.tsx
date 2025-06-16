@@ -9,13 +9,32 @@ import { getMinutesByHours } from "@/lib/timeHelper";
 import { FREE_TIME_LOCAL_STORAGE_KEY } from "../constants/localStorageKeys";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BreadcrumbChallenges } from "../components/BreadcrumbChallenges";
+import { useForm } from "react-hook-form";
 
 export default function Page() {
   const saveAvailableTime = useSaveToLocalStorage();
-
   const getInitialValues = useGetFromLocalStorage();
-  //TODO: Remove form state via use state and add yup + react-hook-form
+  const formInitialValues = getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY);
+
   const [freeTimeInMinutes, setFreeTimeInMinutes] = useState<number | null>(null);
+  const { register } = useForm<FormValues>({
+    defaultValues: {
+      "Monday-hours": formInitialValues ? formInitialValues["Monday-hours"] : "",
+      "Monday-minutes": formInitialValues ? formInitialValues["Monday-minutes"] : "",
+      "Tuesday-hours": formInitialValues ? formInitialValues["Tuesday-hours"] : "",
+      "Tuesday-minutes": formInitialValues ? formInitialValues["Tuesday-minutes"] : "",
+      "Wednesday-hours": formInitialValues ? formInitialValues["Wednesday-hours"] : "",
+      "Wednesday-minutes": formInitialValues ? formInitialValues["Wednesday-minutes"] : "",
+      "Thursday-hours": formInitialValues ? formInitialValues["Thursday-hours"] : "",
+      "Thursday-minutes": formInitialValues ? formInitialValues["Thursday-minutes"] : "",
+      "Friday-hours": formInitialValues ? formInitialValues["Friday-hours"] : "",
+      "Friday-minutes": formInitialValues ? formInitialValues["Friday-minutes"] : "",
+      "Saturday-hours": formInitialValues ? formInitialValues["Saturday-hours"] : "",
+      "Saturday-minutes": formInitialValues ? formInitialValues["Saturday-minutes"] : "",
+      "Sunday-hours": formInitialValues ? formInitialValues["Sunday-hours"] : "",
+      "Sunday-minutes": formInitialValues ? formInitialValues["Sunday-minutes"] : "",
+    },
+  });
 
   function onSubmit(values: FormValues) {
     const daysOfTheWeek = Object.keys(values);
@@ -43,16 +62,17 @@ export default function Page() {
         <CardHeader>
           <CardTitle>Week</CardTitle>
           <CardDescription>
-            Enter your available time per week day, <span className="font-bold underline">currently you have {freeTimeInMinutes ?? 0} minutes</span>
+            Enter your available time per week day,{" "}
+            <span className="font-bold underline">currently you have {freeTimeInMinutes ?? 0} minutes</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <WeeklyScheduleForm onSubmit={onSubmit} initialData={getInitialValues(FREE_TIME_LOCAL_STORAGE_KEY) ?? null} />
+          <WeeklyScheduleForm register={register} onSubmit={onSubmit} />
           <CardTitle>Search videos</CardTitle>
           <CardDescription className="mt-1">Select the videos you'd like to watch during your week</CardDescription>
           <SearchForm
             onSubmit={(values) => {
-              console.log(values);
+              console.log("submiting search");
             }}
           />
         </CardContent>
