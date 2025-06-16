@@ -16,10 +16,10 @@ import {
 import Link from "next/link";
 
 type BreadcrumbChallengesProps = {
-  currentChallenge: string;
+  currentPage: string;
 };
 
-export function BreadcrumbChallenges({ currentChallenge }: BreadcrumbChallengesProps) {
+export function BreadcrumbChallenges({ currentPage }: BreadcrumbChallengesProps) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -46,10 +46,14 @@ export function BreadcrumbChallenges({ currentChallenge }: BreadcrumbChallengesP
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage className="text-white">{currentChallenge}</BreadcrumbPage>
-        </BreadcrumbItem>
+        {currentPage && currentPage.length > 0 && (
+          <>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="text-white">{currentPage}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </>
+        )}
       </BreadcrumbList>
     </Breadcrumb>
   );

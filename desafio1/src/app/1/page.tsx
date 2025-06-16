@@ -16,7 +16,6 @@ export default function Page() {
   const getInitialValues = useGetFromLocalStorage();
   //TODO: Remove form state via use state and add yup + react-hook-form
   const [freeTimeInMinutes, setFreeTimeInMinutes] = useState<number | null>(null);
-  const [formStep, setFormStep] = useState(1);
 
   function onSubmit(values: FormValues) {
     const daysOfTheWeek = Object.keys(values);
@@ -33,19 +32,18 @@ export default function Page() {
 
     setFreeTimeInMinutes(availableTime);
     saveAvailableTime(FREE_TIME_LOCAL_STORAGE_KEY, JSON.stringify(values));
-    setFormStep(2);
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center pb-16">
       <div className="mt-3">
-        <BreadcrumbChallenges currentChallenge="1" />
+        <BreadcrumbChallenges currentPage="1" />
       </div>
       <Card className="bg-neutral-800 lg:w-lg max-w-svh text-white mt-8 border-neutral-600">
         <CardHeader>
           <CardTitle>Week</CardTitle>
           <CardDescription>
-            Enter your available time per week day, currently you have {freeTimeInMinutes ?? 0} minutes
+            Enter your available time per week day, <span className="font-bold underline">currently you have {freeTimeInMinutes ?? 0} minutes</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
