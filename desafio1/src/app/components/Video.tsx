@@ -9,11 +9,13 @@ type VideoProps = {
 
 export function Video({ video }: VideoProps) {
   return (
-    <div className="flex flex-row gap-2 p-2 border-neutral-600 border-2 justify-center items-center">
+    <div className="flex flex-row gap-2 p-2 border-neutral-600 border-2 items-center justify-between">
       <Checkbox id={video.name} />
       <Label htmlFor={video.name} className="cursor-pointer">
-        <Image src={video.thumbnailUrl} alt="YouTube Thumbnail" width={96} height={65} style={{ objectFit: "cover" }} />
-        <div className="flex flex-col gap-1">
+        <div className="relative w-[96px] h-[65px]">
+          <Image src={video.thumbnailUrl} alt="YouTube Thumbnail" fill sizes="96px" style={{ objectFit: "cover" }} />
+        </div>
+        <div className="flex flex-col gap-1 ml-2">
           <span className="text-[0.85rem] font-bold">{video.name}</span>
           <span className="text-[0.75rem]">
             {video.description?.length > 105 ? video.description.slice(0, 105) + "..." : video.description}
