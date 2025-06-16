@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
-import { SearchForm } from "../components/SearchForm";
-import { WeeklyScheduleForm } from "../components/WeeklyScheduleForm";
-import type { FormValues } from "../types/formType";
-import useGetFromLocalStorage from "../hooks/useGetFromLocalStorage";
-import useSaveToLocalStorage from "../hooks/useSaveToLocalStorage";
+import { SearchForm } from "../../components/SearchForm";
+import { WeeklyScheduleForm } from "../../components/WeeklyScheduleForm";
+import type { FormValues } from "../../types/formType";
+import useGetFromLocalStorage from "../../hooks/useGetFromLocalStorage";
+import useSaveToLocalStorage from "../../hooks/useSaveToLocalStorage";
 import { getMinutesByHours } from "@/lib/timeHelper";
-import { FREE_TIME_LOCAL_STORAGE_KEY } from "../constants/localStorageKeys";
+import { FREE_TIME_LOCAL_STORAGE_KEY } from "../../constants/localStorageKeys";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BreadcrumbChallenges } from "../components/BreadcrumbChallenges";
+import { BreadcrumbChallenges } from "../../components/BreadcrumbChallenges";
 import { useForm } from "react-hook-form";
 
 export default function Page() {
